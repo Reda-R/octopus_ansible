@@ -1,0 +1,26 @@
+# - name: redis
+# hosts: webservers
+# remote_user: root
+
+# task:
+- name: install redis
+  become: yes
+  apt:
+    name: redis
+    state: present
+# - name: setup redis
+#- name: install redis
+#  become: yes
+#  apt:
+#    name: redis
+#    status: present
+#    update_cache: yes
+    # state: present
+
+
+#- name: setup redis
+#  apt:
+#    name: "*"
+#    state: latest
+  # apt:
+  # name:

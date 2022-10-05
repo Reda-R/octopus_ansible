@@ -1,0 +1,27 @@
+- name: Extract poll into root
+  ansible.builtin.unarchive:
+    src: poll.tar.xz
+    dest: ~/
+
+- name: Install dependencies
+  become: yes
+  pip:
+    name:
+      - Flask
+      - Redis
+    state: latest
+
+- name: Set the systemd with poll.service
+  copy:
+    src: ../files/poll.service
+    dest: /etc/systemd/system/poll.service
+    when:
+      file:
+        dest:  /etc/systemd/system/poll.service
+        state: present
+    
+
+- name: Launch the systemd poll
+  service:
+    name: poll
+    state: started

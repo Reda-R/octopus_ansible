@@ -1,0 +1,18 @@
+- name: Extract result into root
+  ansible.builtin.unarchive:
+    src: result.tar.xz
+    dest: ~/
+
+- name: Install dependencies
+  npm:
+    path: ~/result/
+
+- name: Set the systemd with result.service
+  copy:
+    src: ../files/result.service
+    dest: /etc/systemd/system/result.service
+
+- name: Launch the systemd result
+  service:
+    name: result
+    state: started

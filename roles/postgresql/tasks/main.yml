@@ -1,0 +1,71 @@
+- name: Install postgreSQL-12
+  become: yes
+  apt:
+    name:
+      - postgresql
+    # state: latest
+    state: present
+
+- name: Install psql
+  become: yes
+  apt:
+    name: postgresql-client
+    state: present
+
+- name: launch psql.services
+  # become: yes
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: yes  
+
+#- name: create user paul
+#  become: yes
+#  become_user: postgres
+#  postgresql_user:
+#    # login_user: "postgres"
+#    # db: paul
+#    # no_password_changes: no
+#    name: paul
+#    # password: "{{ psql_passwd }}"
+#    # role_attr_flags: CREATEDB,NOSUPERUSER
+#  vars:
+#    psql_passwd: !vault |
+#          $ANSIBLE_VAULT;1.1;AES256
+#          31383232613334646265396538313935663339373961306438303238636565623639313461626163
+#          3532626438643535353661383039336262663063326336320a636436343831366562646666666136
+#          36326434373138303665393461383033613938353162363865393062643865613165663366666539
+#          3339323434393736640a616162656365303632356365383862633062326539653963613263633436
+#          36343638636634343535396231313435663665646134326664343736396632666661
+        
+
+#- name: create schema of the DB paul
+#  # become: yes
+#  become: postgres
+#  postgresql_schema:
+#   name: paul
+#   owner: paul
+#   name:
+#     - postgresql-client
+#   state: present
+
+    # state: present
+
+#- name: create user paul
+#  postgresql_user:
+#    name: paul
+#    pswd: !vault |
+#          $ANSIBLE_VAULT;1.1;AES256
+#          33303133336262623736343832386230643164393864383532653162326431396134333135336133
+#          6337633665333765646562313563396466653039306666660a323965613131326131646337373238
+#          64633966363866623461343664363665653939393638326133383138623365633533343530633734
+#          3937343263663136390a623466666463346232356334653837323833363634663139316235376535
+#          35363061366466386438633430653838363336343537386331663435323335643464
+#    role_attr_flags: NOSUPERUSER
+#    state: present
+
+#- name: create schema of the DB paul
+#  postgresql_schema:
+#    name: paul
+#    owner: paul
+#    state: present

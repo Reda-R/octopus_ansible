@@ -1,0 +1,8 @@
+[Unit]
+Description=Poll web client
+
+[Service]
+User=root
+WorkingDirectory=/poll
+ExecStart=/usr/bin/python3 wsgi.py
+Restart=always

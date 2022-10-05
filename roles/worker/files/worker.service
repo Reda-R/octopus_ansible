@@ -1,0 +1,8 @@
+[Unit]
+Description=Worker web client
+
+[Service]
+User=root
+WorkingDirectory=/worker
+ExecStart=/usr/bin/java Worker.java
+Restart=always

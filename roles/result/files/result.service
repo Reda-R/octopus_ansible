@@ -1,0 +1,8 @@
+[Unit]
+Description=Result web client
+
+[Service]
+User=root
+WorkingDirectory=/result
+ExecStart=/usr/bin/npm start server.js
+Restart=always

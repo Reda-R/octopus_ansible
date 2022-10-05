@@ -1,0 +1,25 @@
+- name: Extract worker into root
+  ansible.builtin.unarchive:
+    src: worker.tar.xz
+    dest: ~/
+
+- name: Install dependencies
+  become: yes
+  apt:
+    name:
+      - maven
+      - openjdk-8-jre
+    state: latest
+
+- name: Builds the worker
+  shell: cd ~/worker && mvn dependency:resolve
+
+- name: Set the systemd with worker.service
+  copy:
+    src: ../files/worker.service
+    dest: /etc/systemd/system/worker.service
+
+- name: Launch the systemd worker
+  service:
+    name: worker
+    state: started

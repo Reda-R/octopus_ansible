@@ -1,0 +1,57 @@
+- name: Update apt repo and cache
+  become: yes
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
+  
+#- name: Upgrade all packages on servers
+#  become: yes
+#  apt:
+#    upgrade: dist
+#    force_apt_get: yes
+
+- name: Install required packages
+  become: yes
+  apt:
+    name:
+      - git
+      - vim
+      - python3-apt
+      - python3-pip
+      - python-pip
+      - python
+      - npm
+      # - pip
+      - ssh
+      - openssh-server
+      - nodejs
+      - libpq-dev
+      - python-psycopg2 
+      # - openjdk-8-j
+      # - openjdk
+      # - openjdk-8-jre
+    state: latest
+    install_recommends: yes
+    # state: present
+
+#- name: Install Python pip
+#  become: yes
+#  apt:
+#   name:
+#     - python-pip
+#     - python3-pip
+#    # update_cache: yes
+#    state: present
+#    force_apt_get: yes
+#
+#- name: Install Python packages
+#  become: true
+#  pip:
+#    name:
+#      - psycopg2-binary
+  
+- name: install necessary pip package to use psql
+  pip:
+    name:
+      psycopg2-binary
